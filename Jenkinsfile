@@ -44,10 +44,10 @@ pipeline {
       
         }
     }      
-    stage('Backup Evidencias'){
+    /*stage('Backup Evidencias'){
       steps{
         bat "xcopy /E /I /Y C:/ProgramData/Jenkins/.jenkins/workspace/pruebaconcepto/cypress/videos/* C:/Users/sabas/Desktop/INDRA COMPANY/Cypress_Video_Evidencias${timestamp}_backup"
         }
-    }
+    }*/
   }  
 }
