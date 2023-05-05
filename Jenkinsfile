@@ -22,6 +22,7 @@ pipeline {
         //bat => sh
         bat "npm install"
         bat "npm install cypress"
+        bat "cypress install"
         bat "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
       }
     }
