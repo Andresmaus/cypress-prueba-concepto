@@ -35,14 +35,12 @@ pipeline {
         echo "Deploying the applications"
       }
     }
-  }
-  stages{
-    stage('Publicando Evidencia'){
+    stage('Publicando Evidencia HTML'){
       post{
         always {
           bat(script: 'node ./cucumber-html.report.js')
           publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'reports/cucumber-htmlreport.html', reportFiles: 'index.html', reportName: 'Evidencia Cypress HTML', reportTitles: 'Evidencia Ejecucion', useWrapperFileDirectly: true])
-          publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'cypress/videos', reportFiles: 'cypress.mp4', reportName: 'Video Reporte', reportTitles: 'Evidencia Video Cypress', useWrapperFileDirectly: true])
+          //publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'cypress/videos', reportFiles: 'cypress.mp4', reportName: 'Video Reporte', reportTitles: 'Evidencia Video Cypress', useWrapperFileDirectly: true])
         }
       }
     }
@@ -56,6 +54,5 @@ pipeline {
         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'cypress/videos', reportFiles: 'cypress_grabacion.mp4', reportName: 'Video Reporte', reportTitles: 'Evidencia Video Cypress', useWrapperFileDirectly: true])
       }
     }
-  }
-  
+  }  
 }
