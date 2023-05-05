@@ -14,7 +14,7 @@ pipeline {
   stages{
     stage('Build'){
       steps{
-        echo "Buiding application "
+        echo "Compilando aplicacion"
       }
     }
     stage('Testing'){
@@ -33,6 +33,7 @@ pipeline {
     always {
       sh(script: 'node ./cucumber-html.report.js')
       publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+      publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'cypress/videos', reportFiles: 'cypress.mp4', reportName: 'Video Reporte', reportTitles: 'Video Evidencia', useWrapperFileDirectly: true])
     }
   }
 }

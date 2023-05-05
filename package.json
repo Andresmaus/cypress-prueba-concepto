@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "run cypress:execution",
-    "cy:runner": "cypress open --browser chrome --e2e"
+    "test:runner": "cypress open --browser chrome --e2e",
+    "cypress:execution": "cypress run"
   },
   "author": "andres sanchez barrios",
   "license": "ISC",
