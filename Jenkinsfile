@@ -1,31 +1,45 @@
 pipeline {
   agent any
-  stages {
-    stage('Checkout') {
-      steps {
-        checkout scm
+
+  parameters{
+    string(
+      name: "SPEC", 
+      defaultValue: "cypress/e2e/**/**",
+      description: "Ejemplo: cypress/e2e/features/*.feature"
+      ),
+    choice(
+        name: "BROWSER",
+        choices: ['chrome', "edge"],
+        description: "Escoja un browser donde correr la prueba"
+        )
+  }
+  
+  options{
+    ansiColor('xterm')
+  }
+
+  stages{
+    stage('Build'){
+      steps{
+        echo "Buiding application "
       }
     }
-    stage('Install dependencies') {
-      steps {
-        sh 'npm install --save-dev'
+    stage('Testing'){
+      steps{
+        sh "npm install"
+        sh "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
       }
     }
-    stage('Run tests') {
-      steps {
-        sh 'npm run cypress:execution'
+    stage('Deploy'){
+      steps{
+        echo "Deploying the applications"
       }
-      post{
-        steps {
-        sh 'node ./cucumber-html.report.js'
-      }
-      post {
-        always {
-          junit 'cypress/results/cypress-junit.xml'
-          archiveArtifacts 'cypress/screenshots/**'
-        }
-      }      
-      }
+    }
+  }
+  post{
+    always {
+      sh 'node ./cucumber-html.report.js',
+      publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
     }
   }
 }
