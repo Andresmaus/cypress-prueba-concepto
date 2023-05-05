@@ -3,7 +3,7 @@ pipeline {
 
   parameters{
     string(
-      name: "SPEC",defaultValue: "cypress/e2e/**/**", description: "Ejemplo: cypress/e2e/features/*.feature")
+      name: "SPEC",defaultValue: "cypress/e2e/feature/*.feature", description: "Ejemplo: cypress/e2e/features/*.feature  || cypress/e2e/features/*folder*/*.feature")
       choice(name: "BROWSER", choices: ['chrome', "edge"], description: "Escoja un browser donde correr la prueba")
   }
   
