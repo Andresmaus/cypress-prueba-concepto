@@ -21,6 +21,7 @@ pipeline {
       steps{
         //bat => sh
         bat "npm install"
+        bat "cypress install"
         bat "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
       }
     }
