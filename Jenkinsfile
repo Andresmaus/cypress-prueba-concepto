@@ -22,7 +22,6 @@ pipeline {
         //bat => sh
         bat "npm install"
         bat "npm install cypress"
-        bat "npx cypress install"
         bat "npm run cypress:execution"
         //bat "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
       }
@@ -32,14 +31,13 @@ pipeline {
         echo "Deploying the applications"
       }
     }
-    post{
-        always {
-          bat(script: 'node ./cucumber-html.report.js')
-          publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'reports/cucumber-htmlreport.html', reportFiles: 'index.html', reportName: 'Evidencia Cypress HTML', reportTitles: 'Evidencia Ejecucion', useWrapperFileDirectly: true])
-          //publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'cypress/videos', reportFiles: 'cypress.mp4', reportName: 'Video Reporte', reportTitles: 'Evidencia Video Cypress', useWrapperFileDirectly: true])
-          //publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'cypress/videos', reportFiles: 'cypress_grabacion.mp4', reportName: 'Video Reporte', reportTitles: 'Evidencia Video Cypress', useWrapperFileDirectly: true])
-      
-        }
+  }
+  post{
+    always {
+      bat(script: 'node ./cucumber-html.report.js')
+      publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'reports/cucumber-htmlreport.html', reportFiles: 'index.html', reportName: 'Evidencia Cypress HTML', reportTitles: 'Evidencia Ejecucion', useWrapperFileDirectly: true])
+      //publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'reports', reportFiles: 'index.html', reportName: 'Evidencia Reporte', reportTitles: 'Evidencia Ejecucion', useWrapperFileDirectly: true])
+      //publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'cypress/videos', reportFiles: 'cypress.mp4', reportName: 'Video Reporte', reportTitles: 'Video Evidencia', useWrapperFileDirectly: true])
     }
-  }  
+  }
 }
