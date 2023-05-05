@@ -22,7 +22,8 @@ pipeline {
         //bat => sh
         bat "npm install"
         bat "npm install cypress"
-        bat "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
+        bat "npm run cypress:execution"
+        //bat "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
       }
     }
     stage('Deploy'){
