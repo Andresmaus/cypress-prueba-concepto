@@ -1,7 +1,6 @@
 # Cypress artifacts
 /cypress/videos/
 /cypress/screenshots/
-/cypress/fixtures/
 
 # Cypress generated files
 /cypress/results.json
@@ -11,7 +10,7 @@
 /.tmp/
 
 # Node modules
-/node_modules/
+/node_modules
 
 # Environment variables
 /.env
