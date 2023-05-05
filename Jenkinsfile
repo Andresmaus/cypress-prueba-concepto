@@ -35,24 +35,19 @@ pipeline {
         echo "Deploying the applications"
       }
     }
-    stage('Publicando Evidencia HTML'){
-      post{
+    post{
         always {
           bat(script: 'node ./cucumber-html.report.js')
           publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'reports/cucumber-htmlreport.html', reportFiles: 'index.html', reportName: 'Evidencia Cypress HTML', reportTitles: 'Evidencia Ejecucion', useWrapperFileDirectly: true])
           //publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'cypress/videos', reportFiles: 'cypress.mp4', reportName: 'Video Reporte', reportTitles: 'Evidencia Video Cypress', useWrapperFileDirectly: true])
+          publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'cypress/videos', reportFiles: 'cypress_grabacion.mp4', reportName: 'Video Reporte', reportTitles: 'Evidencia Video Cypress', useWrapperFileDirectly: true])
+      
         }
-      }
-    }
+    }      
     stage('Backup Evidencias'){
       steps{
         bat "xcopy /E /I /Y C:/ProgramData/Jenkins/.jenkins/workspace/pruebaconcepto/cypress/videos/* C:/Users/sabas/Desktop/INDRA COMPANY/Cypress_Video_Evidencias${timestamp}_backup"
         }
-    }
-    stage('Publicando Video'){
-      steps{
-        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'cypress/videos', reportFiles: 'cypress_grabacion.mp4', reportName: 'Video Reporte', reportTitles: 'Evidencia Video Cypress', useWrapperFileDirectly: true])
-      }
     }
   }  
 }
