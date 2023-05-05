@@ -19,8 +19,9 @@ pipeline {
     }
     stage('Testing'){
       steps{
-        sh "npm install"
-        sh "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
+        //bat => sh
+        bat "npm install"
+        bat "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
       }
     }
     stage('Deploy'){
@@ -31,7 +32,7 @@ pipeline {
   }
   post{
     always {
-      sh(script: 'node ./cucumber-html.report.js')
+      bat(script: 'node ./cucumber-html.report.js')
       publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
       publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'cypress/videos', reportFiles: 'cypress.mp4', reportName: 'Video Reporte', reportTitles: 'Video Evidencia', useWrapperFileDirectly: true])
     }
