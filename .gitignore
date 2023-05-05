@@ -1,0 +1,21 @@
+# Cypress artifacts
+/cypress/videos/
+/cypress/screenshots/
+/cypress/fixtures/
+
+# Cypress generated files
+/cypress/results.json
+/cypress/logs/
+
+# Other Cypress artifacts
+/.tmp/
+
+# Node modules
+/node_modules/
+
+# Environment variables
+/.env
+
+# Other build artifacts
+/dist/
+/coverage/
